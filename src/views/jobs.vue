@@ -2,12 +2,14 @@
 <div>
     <table>
   <tr>
+    <th>id</th>
     <th>Titulo</th>
     <th>Autor</th>
      <th>Categoria</th>
   </tr>
   <tr v-for="item in api" :key="item.id">
-    <td>{{item.title}}</td>
+  <td>{{item.id}}</td>
+    <router-link :to="{name:'author',params:{job:item.id}}"><td>{{item.title}}</td></router-link>
     <td>{{item.author}}</td>
      <td>{{item.category}}</td>
   </tr>
@@ -18,6 +20,15 @@
 
 <script>
 export default {
+  computed:{
+    searchApiId(){
+      if(this.api){
+      return this.api.title
+    }else{
+      return 'Temos api'
+    }
+  }
+  },
     data(){
         return{
             api:null
@@ -33,13 +44,15 @@ export default {
         }
     },
     created(){
-        this.fetchJob();
-        console.log(this.api)
+        this.fetchJob();      
     }
     
 }
 </script>
+
+
 <style scoped>
+
 table, td, th {
   border: 1px solid black;
 }

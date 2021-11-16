@@ -10,12 +10,12 @@
                 <th>Categoria</th>
             </tr>
             <tr  v-for="item in categoryData" :key="item.id"  >
+             
+               <router-link :to="{name:'author',params:{job:item.id}}"><td>{{item.title}}></td> </router-link>
                
-                <td  >{{item.title}}</td>
                 <td  >{{item.author}}</td>
                 <td >{{item.category}}</td>
-
-               
+         
             </tr>
             </table>
         </div>
@@ -53,11 +53,7 @@ export default {
     //  }
     // },
     created(){      
-        this.fetchData('jobs')
-       console.log("Estou funcionando")
-       console.log(this.api)
-
-    },
+        this.fetchData('jobs')    },
    
 }
 </script>

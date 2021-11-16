@@ -1,53 +1,40 @@
 <template>
-<div class="content_author">   
-   
-    <List :list=authorList @sendAuthor='updateAuthor($event)'> 
-        <h1>Pagina do autor</h1>
-    </List>
+<div class="content_author">    
+         
+        <ShowCase :text='api.idAuthor'></ShowCase>
+        <Reader :text='api'></Reader>      
+        <AllAuthorWorks :text='api.idAuthor'></AllAuthorWorks>
+
     
-    <ShowCase :newAuthor=author></ShowCase>
+  
 </div>
 
 </template>
 
 <script>
-import List from '../components/list.vue'
+import Reader from '../components/readerPage.vue'
 import ShowCase from '../components/showcase.vue'
+import AllAuthorWorks from '../components/allAuthorWorks.vue'
+import fetchData from '../mixins/fetchData'
 
-export default {
+
+export default {   
     name:"author",
-   components:{
-       List,    
-       ShowCase
-   },
-   data(){
-       return{
-           authorList:null,
-           mensagem:"",
-        author:null
-
-       }
-   },
-   methods:{
-       fetchAuthorList(){
-           fetch("http://localhost:3000/author")
-           .then(r => r.json())
-           .then(r => {
-               this.authorList = r
-           })
-       },
-       updateAuthor(id){
-            fetch(`http://localhost:3000/author/${id}`)
-           .then(r => r.json())
-           .then(r => {
-               this.author = r              
-           })
-       }
-   },
+    props:['job'],
+    mixins:[fetchData], 
+    components:{
+        Reader,
+        ShowCase,
+        AllAuthorWorks
+    },
    created(){
-       this.fetchAuthorList();     
-       
-   }
+       this.fetchData(`jobs/${this.job}`) ;          
+   },
+     beforeRouteUpdate(to, from, next){
+        this.fetchData(`jobs/${to.params.job}`);
+        next();
+    }
+   
     
 }
 </script>

@@ -1,10 +1,12 @@
 import Vue from  'vue';
 import Router from 'vue-router';
+import Authors from './views/authors.vue'
 import Author from './views/author.vue'
 import Aboutus from './views/aboutus.vue'
 import Category from './views/category.vue'
 import Jobs from './views/jobs.vue'
 import Home from './views/home.vue'
+import Admin from './views/admin.vue'
 
 
 Vue.use(Router)
@@ -15,31 +17,42 @@ export default new Router({
     routes:[   
        {
            path:'/autores',
-           component:Author 
+           component:Authors 
 
        },
        {
-        path:'/obras',
-        component:Jobs 
+        path:'/admin',
+        component:Admin 
 
-    },
-    {
-        path:'/categoria/:category',
-        component:Category, 
-        props:true
+        },
+        {
+            path:'/obras',
+            component:Jobs 
 
-    },
-    {
-        path:'/quemsomos',
-        component:Aboutus 
+        },
+        {
+            path:'/categoria/:category',
+            component:Category, 
+            props:true
 
-    },
-    {
-        path:'/',
-        component:Home 
+        },
+        {
+            path:'/quemsomos',
+            component:Aboutus 
 
-    }
-        
+        },
+        {
+            name:'author',
+            path:'/author/:job',
+            component:Author,
+            props:true 
+
+        },
+        {
+            path:'/',
+            component:Home 
+
+        }        
 
     ]
 })

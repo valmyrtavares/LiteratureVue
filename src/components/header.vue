@@ -12,6 +12,8 @@
     </span>
   </router-link>
   <router-link to="/quemsomos">Quem somos</router-link>
+  <router-link to="/admin">Admin</router-link>
+
   
   
 </nav>
